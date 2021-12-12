@@ -7,8 +7,7 @@ pygame.init()
 screen = pygame.display.set_mode([800, 600])
 RUN = True
 
-#tegin praegu selle klassi, sest ilma ma ei saa alustada
-
+#tegin praegu selle klassi, sest ilma ma ei saa alustada mängu liikumise tegemisega
 class Player:
     def __init__(self):
         self.x = 320
