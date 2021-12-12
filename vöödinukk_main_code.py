@@ -1,11 +1,13 @@
 import pygame, sys
-#from klassid.py import *
 
-playerpilt = "t_front1"
+
+playerpilt = "t_front1.png"
 
 pygame.init()
 screen = pygame.display.set_mode([800, 600])
 RUN = True
+
+#tegin praegu selle klassi, sest ilma ma ei saa alustada
 
 class Player:
     def __init__(self):
@@ -13,7 +15,7 @@ class Player:
         self.y = 240
         self.vx = 0
         self.vy = 0
-        self.img = pygame.image.load(playerpilt)  #<----- see siin veel ei tööta
+        self.img = pygame.image.load(playerpilt)  #sai korda
     def update(self, dt):
         self.x += self.vx * dt
         self.y += self.vy * dt
@@ -22,7 +24,7 @@ class Player:
         
 player = Player()
 
-speed = 10
+speed = 100
 kell = pygame.time.Clock()
 
 while RUN:
@@ -30,27 +32,31 @@ while RUN:
         if e.type == pygame.QUIT:
             RUN = False
         if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
-            if e.key == K_UP:
-                player.vy += speed
-            if e.key == K_DOWN:
+            if e.key == pygame.K_UP:
                 player.vy -= speed
-            if e.key == K_LEFT:
+            if e.key == pygame.K_DOWN:
+                player.vy += speed
+            if e.key == pygame.K_LEFT:
                 player.vx -= speed
-            if e.key == K_RIGHT:
+            if e.key == pygame.K_RIGHT:
                 player.vx += speed
-        if e.type == pygame.UP: #kui enam ei vajutata seda
-            if e.key == K_UP:
-                player.vy -= speed
-            if e.key == K_DOWN:
+        if e.type == pygame.KEYUP: #kui enam ei vajutata seda
+            if e.key == pygame.K_UP:
                 player.vy += speed
-            if e.key == K_LEFT:
+            if e.key == pygame.K_DOWN:
+                player.vy -= speed
+            if e.key == pygame.K_LEFT:
                 player.vx += speed
-            if e.key == K_RIGHT:
+            if e.key == pygame.K_RIGHT:
                 player.vx -= speed
     
+    dt = kell.tick()/1000
     screen.fill([255, 255, 255])
+    
     player.update(dt) #uuendame asukohta
+    
     player.draw(screen) #joonistame ekraanile
+    
     pygame.display.flip()
 
 pygame.quit()
