@@ -10,6 +10,6 @@ while RUN:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             RUN = False
-    
+        if e.type == pygame.
 
 pygame.quit()
