@@ -1,5 +1,12 @@
 import pygame, sys
-
+#teen praegu vist nii et liigutan pildid mis on eraldi kaustas ühisesse listi, et saaksin hiljem panna characteri
+#ka liikuma 
+from PIL import Image
+import glob
+image_list = []
+for filename in glob.glob('C:\Users\rober\Documents\GitHub\vdinukk/*.png'): #assuming gif
+    im=Image.open(filename)
+    image_list.append(im)
 
 playerpilt = "t_front1.png"
 
