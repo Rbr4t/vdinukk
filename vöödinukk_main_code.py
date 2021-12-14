@@ -1,17 +1,53 @@
 import pygame, sys
-#teen praegu vist nii et liigutan pildid mis on eraldi kaustas ühisesse listi, et saaksin hiljem panna characteri
-#ka liikuma 
-from PIL import Image
-import glob
-image_list = []
-for filename in glob.glob('C:\Users\rober\Documents\GitHub\vdinukk/*.png'): #assuming gif
-    im=Image.open(filename)
-    image_list.append(im)
 
-playerpilt = "t_front1.png"
+#FUNKTSIOONID
+
+def X():
+    left = False
+    right = False
+    up = False
+    down = False
+#tuleb piltide animeerimine:
+
+walkLeft = [pygame.image.load("characters/tüdruk_left/t_left1.png"),
+            pygame.image.load("characters/tüdruk_left/t_left2.png"), pygame.image.load("characters/tüdruk_left/t_left3.png"),
+            pygame.image.load("characters/tüdruk_left/t_left4.png")]
+walkRight = [pygame.image.load("characters/tüdruk_right/t_right1.png"), pygame.image.load("characters/tüdruk_right/t_right2.png"),
+             pygame.image.load("characters/tüdruk_right/t_right3.png"), pygame.image.load("characters/tüdruk_right/t_right4.png")]
+walkFront = [pygame.image.load("characters/tüdruk_front/t_front1.png"), pygame.image.load("characters/tüdruk_front/t_front2.png"),
+             pygame.image.load("characters/tüdruk_front/t_front3.png"), pygame.image.load("characters/tüdruk_front/t_front4.png")]
+walkBack = [pygame.image.load("characters/tüdruk_back/t_back1.png"), pygame.image.load("characters/tüdruk_back/t_back2.png"),
+            pygame.image.load("characters/tüdruk_back/t_back3.png"), pygame.image.load("characters/tüdruk_back/t_back4.png")]
+playerpilt = "characters/tüdruk_front/t_front1.png"
+
+def redrawWindow():
+    global walkCount
+    screen.blit(bg, (0, 0))
+    if walkCount +1 >= 32:
+        walkCount = 0
+    if left:  #kui on vasakul
+        screen.blit(walkLeft[walkCount//8], (player.x, player.y)) #siis näitame ekraanile vasakule liikuvad pildid
+                                                    # järjekorranumbri, milleks on walkCOunt muutuja
+        walkCount += 1                              #x ja y kordinaatidele
+    elif right:
+        screen.blit(walkRight[walkCount//8], (player.x, player.y))
+        walkCount += 1
+        
+    elif up:
+        screen.blit(walkBack[walkCount//8], (player.x, player.y))
+        walkCount += 1
+    elif down:
+        screen.blit(walkFront[walkCount//8], (player.x, player.y))
+    else:
+        screen.blit(screen, (player.x, player.y))
+        
+    pygame.display.flip()
 
 pygame.init()
+
+bg = pygame.Surface((640, 480)) #vajalik hilisemaks animeerimiseks
 screen = pygame.display.set_mode([800, 600])
+
 RUN = True
 
 #tegin praegu selle klassi, sest ilma ma ei saa alustada mängu liikumise tegemisega
@@ -30,7 +66,14 @@ class Player:
         
 player = Player()
 
+#tulevad animeerimisega seotud väärtused
+left = False
+right = False
+up = False
+down = False
+
 speed = 100
+walkCount= 0 #see muutuja on siin selle jaoks et hiljem saaks
 kell = pygame.time.Clock()
 
 while RUN:
@@ -38,31 +81,51 @@ while RUN:
         if e.type == pygame.QUIT:
             RUN = False
         if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
-            if e.key == pygame.K_UP:
+            if e.key == pygame.K_UP: # and player.x > speed
                 player.vy -= speed
+                left = False
+                right = False
+                up = True
+                down = False
             if e.key == pygame.K_DOWN:
                 player.vy += speed
+                left = False
+                right = False
+                up = False
+                down = True
+                
             if e.key == pygame.K_LEFT:
                 player.vx -= speed
+                left = True
+                right = False
+                up = False
+                down = False
+
             if e.key == pygame.K_RIGHT:
                 player.vx += speed
+                left = False
+                right = True
+                up = False
+                down = False
         if e.type == pygame.KEYUP: #kui enam ei vajutata seda
             if e.key == pygame.K_UP:
                 player.vy += speed
+                X()
             if e.key == pygame.K_DOWN:
                 player.vy -= speed
+                X()
             if e.key == pygame.K_LEFT:
                 player.vx += speed
+                X()
             if e.key == pygame.K_RIGHT:
                 player.vx -= speed
+                X()
     
     dt = kell.tick()/1000
     screen.fill([255, 255, 255])
     
     player.update(dt) #uuendame asukohta
     
-    player.draw(screen) #joonistame ekraanile
-    
-    pygame.display.flip()
+    redrawWindow()
 
 pygame.quit()
