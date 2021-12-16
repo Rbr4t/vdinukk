@@ -31,6 +31,7 @@ class Player:
         self.y = 240
         self.vx = 0
         self.vy = 0
+        
         self.image = pygame.Surface([800, 600])  
         self.left = False  #tulevad animeerimisega seotud väärtused
         self.right = False
@@ -44,8 +45,21 @@ class Player:
         self.walkCount = 0 
         
     def update(self, dt):
-        self.x += self.vx * dt
-        self.y += self.vy * dt
+    
+        if listi.count(buttonspressed[0]) and listi.count(buttonspressed[1]):
+           self.y = self.vy/2
+           self.x = self.vx/2
+#         if abs(self.vx) == abs(self.vy):
+#             self.speed = 1
+#             self.vx = 10
+#             self.vy = 10                #pass5
+        else:
+            
+            self.x += self.vx * dt
+            print(self.vx)
+            self.y += self.vy * dt
+            print(self.vy)
+            
         
     def draw(self, s):
         s.blit(self.image, [self.x - self.image.get_width() / 2, self.y - self.image.get_height() / 2])
@@ -91,6 +105,10 @@ screen = pygame.display.set_mode([800, 600])
 
 RUN = True
 
+
+listi = ["UP", "LEFT", "RIGHT", "DOWN"]
+buttonspressed = []
+
 player = Player()
 
 kell = pygame.time.Clock()
@@ -107,26 +125,28 @@ while RUN:
                 player.right = False
                 player.up = True
                 player.down = False
+                buttonspressed.append("UP")
             if e.key == pygame.K_DOWN:
                 player.vy += player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = True
-                
+                buttonspressed.append("DOWN")
             if e.key == pygame.K_LEFT:
                 player.vx -= player.speed
                 player.left = True
                 player.right = False
                 player.up = False
                 player.down = False
-
+                buttonspressed.append("LEFT")
             if e.key == pygame.K_RIGHT:
                 player.vx += player.speed
                 player.left = False
                 player.right = True
                 player.up = False
                 player.down = False
+                buttonspressed.append("RIGHT")
         if e.type == pygame.KEYUP: #kui enam ei vajutata seda
             if e.key == pygame.K_UP:
                 player.vy += player.speed
@@ -134,29 +154,34 @@ while RUN:
                 player.right = False
                 player.up = False
                 player.down = False
-                player.stayfront = False   
-                player.stayback = True
+#                 player.stayfront = False   
+#                 player.stayback = True
+                buttonspressed.remove("UP")
             if e.key == pygame.K_DOWN:
                 player.vy -= player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = False
-                player.stayfront = True   
-                player.stayback = False
+#                 player.stayfront = True   
+#                 player.stayback = False
+                buttonspressed.remove("DOWN")
             if e.key == pygame.K_LEFT:
                 player.vx += player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = False
+                buttonspressed.remove("LEFT")
             if e.key == pygame.K_RIGHT:
                 player.vx -= player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = False
+                buttonspressed.remove("RIGHT")
     
+    #print(buttonspressed)
     dt = kell.tick()/500
     
     player.update(dt) #uuendame asukohta
