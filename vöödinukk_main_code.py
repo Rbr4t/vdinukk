@@ -7,6 +7,7 @@ def redrawWindow():
     player.control(screen)
     pygame.display.flip()
     
+    
 #ANIMEERIMINE
 
 #vajalikud pildid võetud kaustast
@@ -112,7 +113,7 @@ buttonspressed = []
 player = Player()
 
 kell = pygame.time.Clock()
-
+player.stayfront = True
 while RUN:
     pygame.time.delay(17)
     for e in pygame.event.get():
@@ -183,7 +184,6 @@ while RUN:
     
     #print(buttonspressed)
     dt = kell.tick()/500
-    
     player.update(dt) #uuendame asukohta
     
     redrawWindow()
