@@ -1,7 +1,7 @@
 import pygame, pygame_gui
 
 pygame.init()
-
+pygame.display.set_caption("Vöödinukk")
 aken = pygame.display.set_mode([800, 600])
 manager = pygame_gui.UIManager([800, 600])  # loome UIManager objekti
 
