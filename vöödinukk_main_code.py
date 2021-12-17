@@ -47,20 +47,16 @@ class Player:
         
     def update(self, dt):
     
-        if listi.count(buttonspressed[0]) and listi.count(buttonspressed[1]):
-           self.y = self.vy/2
-           self.x = self.vx/2
-#         if abs(self.vx) == abs(self.vy):
-#             self.speed = 1
-#             self.vx = 10
-#             self.vy = 10                #pass5
+        if abs(self.vx) == abs(self.vy):
+            
+            pass          #Jätan nii et diagonaalselt ei saaks liikuda
         else:
             
             self.x += self.vx * dt
             print(self.vx)
             self.y += self.vy * dt
             print(self.vy)
-            
+        
         
     def draw(self, s):
         s.blit(self.image, [self.x - self.image.get_width() / 2, self.y - self.image.get_height() / 2])
