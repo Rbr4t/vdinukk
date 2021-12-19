@@ -134,36 +134,13 @@ def mäng():
     player.stayfront = True
     bg = koridor
     while RUN:
-        kell.tick(170)
+        pygame.time.delay(17)
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 RUN = False
             if bg == koridor:
                 #koridori seinad, ei tööta korralikult
-                """
-
-                if player.x < 39 and ((player.y <= 441 and player.y >= 375) or (player.y <= 302 and player.y >= 130)):
-                    player.x = 39
-                    # vasak külg
-                elif player.y > 441 and ((player.x >= 39 and player.x <= 129) or (player.x >= 210 and player.x <= 310)):
-                    player.y = 441
-                    # alumine külg
-                elif player.x > 310 and (player.y <= 441 and player.y >= 236):
-                    player.x = 310
-                    # alumine külg, parem
-                elif player.x > 713 and (player.y <= 235 and player.y >= 4):
-                    player.x = 713
-                    #parem külg, ülemine
-                elif (player.y < 134 and player.y > 130)  and (player.x >= 39 and player.x <= 511):
-                    player.y = 130
-                    #ülemine külg
-                elif player.x < 562 and (player.y <= 130 and player.y >= 1):
-                    player.x = 562
-                    #vasak külg, ülemine
-                elif player.y > 235 and (player.x >= 310 and player.x <= 713):
-                    player.y = 235
-                    # alumine külg, parem
-                    """
+                #ei tööta siis ei tööta, manuaalselt vist ei tohiks saadagi seda teha
                 if player.y < 1 and (player.x >= 562 and player.x<= 715):
                     player.y = 385
                     bg = magamistuba
@@ -204,67 +181,6 @@ def mäng():
                     bg = sahver2
                     sahver = sahver2
                     uks.play()
-
-            if player.y < 1 and (player.x >= 562 and player.x<= 715):
-                player.y = 385
-                bg = magamistuba
-                uks.play()
-            elif player.x < 5 and (player.y >= 320 and player.y <= 383):
-                bg = elutuba
-                player.x = 725
-                uks.play()
-                player.y = 300
-        if bg == magamistuba:
-            if player.y <= 80 and (player.x >= 544 and player.x <= 707):
-                bg = sahver
-                player.y = 433
-                uks.play()
-            elif player.y > 385 and (player.x >= 544 and player.x<= 707):
-                bg = koridor
-                player.y = 2
-                uks.play()
-        if bg == elutuba:
-            if player.x > 730 and (player.y >= 274 and player.y <= 343):
-                bg = koridor
-                player.x =35
-                player.y = 360
-                uks.play()
-            elif player.y <= 1 and (player.x >= 178 and player.x <= 230):
-                bg = köök
-                player.x = 254
-                player.y = 494
-                uks.play()
-            elif player.y <= 150 and (player.x >= 410 and player.x <= 430):
-                bg = köök2
-                köök = köök2
-                player.x = 510
-                player.y = 484
-                uks.play()
-        if bg == sahver:
-            if player.x < 210 and (player.y > 216 and player.y < 260):
-                bg = sahver2
-                sahver = sahver2
-                uks.play()
-            
-            if player.y > 435 and (player.x >= 545 and player.x <= 710):
-                bg = magamistuba
-                player.x = 600
-                player.y = 90
-                uks.play()
-        if bg == köök:
-            if player.y >= 505 and (player.x > 213 and player.x <= 290):
-                bg = elutuba
-                player.x = 204
-                player.y = 7
-                uks.play()
-                #köök
-            elif player.y >= 490 and (player.x > 480 and player.x <= 520):
-                bg = elutuba
-                player.x = 420
-                player.y = 153
-                uks.play()
-                #salaruum
-
                 
                 if player.y > 435 and (player.x >= 545 and player.x <= 710):
                     bg = magamistuba
@@ -364,91 +280,9 @@ def mäng():
         dt = kell.tick()/500
         player.update(dt) #uuendame asukohta
         
-
         redrawWindow()
         screen.fill([255, 255, 255])
         
     pygame.quit()
 
 mäng()
-
-        if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
-            if e.key == pygame.K_UP: # and player.x > speed
-                player.vy -= player.speed
-                player.left = False
-                player.right = False
-                player.up = True
-                player.down = False
-                kõndimine.play(-1)
-                
-            if e.key == pygame.K_DOWN:
-                player.vy += player.speed
-                player.left = False
-                player.right = False
-                player.up = False
-                player.down = True
-                kõndimine.play(-1)
-                
-            if e.key == pygame.K_LEFT:
-                player.vx -= player.speed
-                player.left = True
-                player.right = False
-                player.up = False
-                player.down = False
-                kõndimine.play(-1)
-                
-            if e.key == pygame.K_RIGHT:
-                player.vx += player.speed
-                player.left = False
-                player.right = True
-                player.up = False
-                player.down = False
-                kõndimine.play(-1)
-                
-        if e.type == pygame.KEYUP: #kui enam ei vajutata seda
-            if e.key == pygame.K_UP:
-                player.vy += player.speed
-                player.left = False
-                player.right = False
-                player.up = False
-                player.down = False
-                kõndimine.stop()
-#                 player.stayfront = False   
-#                 player.stayback = True
-               
-            if e.key == pygame.K_DOWN:
-                player.vy -= player.speed
-                player.left = False
-                player.right = False
-                player.up = False
-                player.down = False
-                kõndimine.stop()
-#                 player.stayfront = True   
-#                 player.stayback = False
-                
-            if e.key == pygame.K_LEFT:
-                player.vx += player.speed
-                player.left = False
-                player.right = False
-                player.up = False
-                player.down = False
-                kõndimine.stop()
-                
-            if e.key == pygame.K_RIGHT:
-                player.vx -= player.speed
-                player.left = False
-                player.right = False
-                player.up = False
-                player.down = False
-                kõndimine.stop()
-#     color = bg.get_at((int(player.x), int(player.y)))
-#     print(color)
-    #print(buttonspressed)
-    dt = kell.tick()/500
-    player.update(dt) #uuendame asukohta
-    
-    redrawWindow()
-    screen.fill([255, 255, 255])
-    
-pygame.quit()
-
