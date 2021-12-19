@@ -128,6 +128,7 @@ while RUN:
         if e.type == pygame.QUIT:
             RUN = False
         if bg == koridor:
+            #koridori seinad, ei tööta korralikult
             """
             if player.x < 39 and ((player.y <= 441 and player.y >= 375) or (player.y <= 302 and player.y >= 130)):
                 player.x = 39
@@ -159,15 +160,46 @@ while RUN:
                 player.x = 725
                 player.y = 300
         if bg == magamistuba:
-            if player.y > 385 and (player.x >= 544 and player.x<= 707):
-                bg = koridor
-                player.y = 2
-            elif player.y < 80 and (player.x >= 544 and player.x <= 707):
+            if player.y <= 80 and (player.x >= 544 and player.x <= 707):
                 bg = sahver
                 player.y = 433
-        #if bg == elutuba:
+            elif player.y > 385 and (player.x >= 544 and player.x<= 707):
+                bg = koridor
+                player.y = 2
+        if bg == elutuba:
+            if player.x > 730 and (player.y >= 274 and player.y <= 343):
+                bg = koridor
+                player.x =35
+                player.y = 360
+            elif player.y <= 1 and (player.x >= 178 and player.x <= 230):
+                bg = köök
+                player.x = 254
+                player.y = 494
+            elif player.y <= 150 and (player.x >= 410 and player.x <= 430):
+                bg = köök2
+                köök = köök2
+                player.x = 510
+                player.y = 484
+        if bg == sahver:
+            if player.x < 210 and (player.y > 216 and player.y < 260):
+                bg = sahver2
+                sahver = sahver2
             
-        #if bg == 
+            if player.y > 435 and (player.x >= 545 and player.x <= 710):
+                bg = magamistuba
+                player.x = 600
+                player.y = 90
+        if bg == köök:
+            if player.y >= 505 and (player.x > 213 and player.x <= 290):
+                bg = elutuba
+                player.x = 204
+                player.y = 7
+                #köök
+            elif player.y >= 490 and (player.x > 480 and player.x <= 520):
+                bg = elutuba
+                player.x = 420
+                player.y = 150
+                #salaruum
         if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
             if e.key == pygame.K_UP: # and player.x > speed
                 player.vy -= player.speed
