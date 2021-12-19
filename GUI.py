@@ -1,5 +1,5 @@
 from pygame import *
-import pygame_gui, pygame
+import pygame_gui, pygame, random
 
 def mäng():
     import pygame
@@ -20,9 +20,13 @@ def mäng():
         screen.blit(bg, (0, 0))
         player.control(screen)
         pygame.display.flip()
-
-    tegelane = "Poiss"
-    #Tegelase valik?
+        
+    #tegelase valik
+    arv = random.randint(1, 2)
+    if arv == 1:
+        tegelane = "Poiss"
+    if arv == 2:
+        tegelane = "Tüdruk"
     #ANIMEERIMINE
 
 #vajalikud pildid võetud kaustast
