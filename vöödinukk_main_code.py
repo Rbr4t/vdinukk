@@ -23,8 +23,18 @@ playerpilt = "characters/tüdruk_front/t_front1.png"
 playerpilt2 = playerpilt
 char = pygame.image.load(playerpilt)
 char2 = pygame.image.load(playerpilt2)
-#KLASSID
 
+#TAUST
+
+elutuba = pygame.image.load("bg/elutuba.png")
+köök1 = pygame.image.load("bg/köök1.png")
+köök2 = pygame.image.load("bg/köök2.png")
+koridor = pygame.image.load("bg/koridoor.png")
+magamistuba = pygame.image.load("bg/magamistuba.png")
+sahver1 = pygame.image.load("bg/sahver1.png")
+sahver2 = pygame.image.load("bg/sahver2.png")
+
+#KLASSID
 #playeri klass, mainklass
 class Player:
     def __init__(self):
@@ -53,9 +63,9 @@ class Player:
         else:
             
             self.x += self.vx * dt
-            print(self.vx)
+            #print(self.vx)
             self.y += self.vy * dt
-            print(self.vy)
+            #print(self.vy)
         
         
     def draw(self, s):
@@ -110,11 +120,18 @@ player = Player()
 
 kell = pygame.time.Clock()
 player.stayfront = True
+bg = koridor
 while RUN:
     pygame.time.delay(17)
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             RUN = False
+        if bg == koridor:
+            if player.x < 39 and ((player.y <= 441 and player.y >= 375) or (player.y <= 302 and player.y >= 130)):
+                can_walk = False
+                player.x = 39
+            else:
+                can_walk = True
         if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
             if e.key == pygame.K_UP: # and player.x > speed
                 player.vy -= player.speed
@@ -177,8 +194,10 @@ while RUN:
                 player.up = False
                 player.down = False
                 buttonspressed.remove("RIGHT")
-    
+        
     #print(buttonspressed)
+    print(int(player.x), int(player.y))
+    #asukoha kontrollimiseks
     dt = kell.tick()/500
     player.update(dt) #uuendame asukohta
     
