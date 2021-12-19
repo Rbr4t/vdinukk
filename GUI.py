@@ -153,6 +153,8 @@ def mäng():
 
     kell = pygame.time.Clock()
     player.stayfront = True
+    võti1_leitud = False
+    võti2_leitud = False
     bg = koridor
     while RUN:
         pygame.time.delay(17)
@@ -169,6 +171,10 @@ def mäng():
                     player.x = 725
                     uks.play()
                     player.y = 300
+                if võti1_leitud and võti2_leitud:
+                    if player.y > 460 and (player.x >= 130 and player.x<= 190):
+                        print("Pääsesid majast välja, tubli töö!")
+                        RUN = False
             if bg == magamistuba:
                 if player.y <= 80 and (player.x >= 544 and player.x <= 707):
                     bg = sahver
@@ -190,8 +196,11 @@ def mäng():
                     player.y = 494
                     uks.play()
                 elif player.y <= 150 and (player.x >= 410 and player.x <= 430):
-                    bg = köök2
-                    köök = köök2
+                    if köök == köök1:
+                        bg = köök2
+                        köök = köök2
+                        võti1_leitud = True
+                        print("Leidsid 1. võtme!")
                     player.x = 510
                     player.y = 484
                     uks.play()
@@ -201,6 +210,11 @@ def mäng():
                         uks.play()
                         bg = sahver2
                         sahver = sahver2
+                        if võti1_leitud:
+                            võti2_leitud = True
+                            print("Leidsid 2. võtme!")
+                        else:
+                            print("Kast on lukus!")
                 if player.y > 435 and (player.x >= 545 and player.x <= 710):
                     bg = magamistuba
                     player.x = 600
@@ -291,11 +305,6 @@ def mäng():
                     player.up = False
                     player.down = False
                     kõndimine.stop()
-    #     color = bg.get_at((int(player.x), int(player.y)))
-    #     print(color)
-        #print(buttonspressed)
-        print(int(player.x), int(player.y))
-        #asukoha kontrollimiseks
         dt = kell.tick()/500
         player.update(dt) #uuendame asukohta
         
