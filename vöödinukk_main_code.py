@@ -218,7 +218,7 @@ while RUN:
             elif player.y >= 490 and (player.x > 480 and player.x <= 520):
                 bg = elutuba
                 player.x = 420
-                player.y = 150
+                player.y = 153
                 uks.play()
                 #salaruum
                 
@@ -296,8 +296,6 @@ while RUN:
 #     color = bg.get_at((int(player.x), int(player.y)))
 #     print(color)
     #print(buttonspressed)
-    print(int(player.x), int(player.y))
-    #asukoha kontrollimiseks
     dt = kell.tick()/500
     player.update(dt) #uuendame asukohta
     
