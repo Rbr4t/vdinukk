@@ -7,7 +7,6 @@ def redrawWindow():
     player.control(screen)
     pygame.display.flip()
     
-    
 #ANIMEERIMINE
 
 #vajalikud pildid võetud kaustast
@@ -33,6 +32,8 @@ koridor = pygame.image.load("bg/koridoor.png")
 magamistuba = pygame.image.load("bg/magamistuba.png")
 sahver1 = pygame.image.load("bg/sahver1.png")
 sahver2 = pygame.image.load("bg/sahver2.png")
+sahver = sahver1
+köök = köök1
 
 #KLASSID
 #playeri klass, mainklass
@@ -127,11 +128,46 @@ while RUN:
         if e.type == pygame.QUIT:
             RUN = False
         if bg == koridor:
+            """
             if player.x < 39 and ((player.y <= 441 and player.y >= 375) or (player.y <= 302 and player.y >= 130)):
-                can_walk = False
                 player.x = 39
-            else:
-                can_walk = True
+                # vasak külg
+            elif player.y > 441 and ((player.x >= 39 and player.x <= 129) or (player.x >= 210 and player.x <= 310)):
+                player.y = 441
+                # alumine külg
+            elif player.x > 310 and (player.y <= 441 and player.y >= 236):
+                player.x = 310
+                # alumine külg, parem
+            elif player.x > 713 and (player.y <= 235 and player.y >= 4):
+                player.x = 713
+                #parem külg, ülemine
+            elif (player.y < 134 and player.y > 130)  and (player.x >= 39 and player.x <= 511):
+                player.y = 130
+                #ülemine külg
+            elif player.x < 562 and (player.y <= 130 and player.y >= 1):
+                player.x = 562
+                #vasak külg, ülemine
+            elif player.y > 235 and (player.x >= 310 and player.x <= 713):
+                player.y = 235
+                # alumine külg, parem
+                """
+            if player.y < 1 and (player.x >= 562 and player.x<= 715):
+                player.y = 385
+                bg = magamistuba
+            elif player.x < 5 and (player.y >= 320 and player.y <= 383):
+                bg = elutuba
+                player.x = 725
+                player.y = 300
+        if bg == magamistuba:
+            if player.y > 385 and (player.x >= 544 and player.x<= 707):
+                bg = koridor
+                player.y = 2
+            elif player.y < 80 and (player.x >= 544 and player.x <= 707):
+                bg = sahver
+                player.y = 433
+        #if bg == elutuba:
+            
+        #if bg == 
         if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
             if e.key == pygame.K_UP: # and player.x > speed
                 player.vy -= player.speed
