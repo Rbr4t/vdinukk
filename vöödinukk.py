@@ -212,6 +212,7 @@ def mäng():
                         uks.play()
                         bg = sahver2
                         sahver = sahver2
+                    if player.x < 210 and (player.y >= 216 and player.y <= 260):
                         if võti1_leitud:
                             võti2_leitud = True
                             print("Leidsid 2. võtme!")
