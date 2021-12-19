@@ -178,10 +178,10 @@ def mäng():
                     uks.play()
             if bg == sahver:
                 if player.x < 210 and (player.y > 216 and player.y < 260):
-                    bg = sahver2
-                    sahver = sahver2
-                    uks.play()
-                
+                    if sahver == sahver1:
+                        uks.play()
+                        bg = sahver2
+                        sahver = sahver2
                 if player.y > 435 and (player.x >= 545 and player.x <= 710):
                     bg = magamistuba
                     player.x = 600
@@ -197,7 +197,7 @@ def mäng():
                 elif player.y >= 490 and (player.x > 480 and player.x <= 520):
                     bg = elutuba
                     player.x = 420
-                    player.y = 150
+                    player.y = 153
                     uks.play()
                     #salaruum
                     
@@ -275,8 +275,6 @@ def mäng():
     #     color = bg.get_at((int(player.x), int(player.y)))
     #     print(color)
         #print(buttonspressed)
-        print(int(player.x), int(player.y))
-        #asukoha kontrollimiseks
         dt = kell.tick()/500
         player.update(dt) #uuendame asukohta
         
