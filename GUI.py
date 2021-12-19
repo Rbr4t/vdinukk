@@ -142,30 +142,6 @@ def mäng():
             if e.type == pygame.QUIT:
                 RUN = False
             if bg == koridor:
-                #koridori seinad, ei tööta korralikult
-                """
-                if player.x < 39 and ((player.y <= 441 and player.y >= 375) or (player.y <= 302 and player.y >= 130)):
-                    player.x = 39
-                    # vasak külg
-                elif player.y > 441 and ((player.x >= 39 and player.x <= 129) or (player.x >= 210 and player.x <= 310)):
-                    player.y = 441
-                    # alumine külg
-                elif player.x > 310 and (player.y <= 441 and player.y >= 236):
-                    player.x = 310
-                    # alumine külg, parem
-                elif player.x > 713 and (player.y <= 235 and player.y >= 4):
-                    player.x = 713
-                    #parem külg, ülemine
-                elif (player.y < 134 and player.y > 130)  and (player.x >= 39 and player.x <= 511):
-                    player.y = 130
-                    #ülemine külg
-                elif player.x < 562 and (player.y <= 130 and player.y >= 1):
-                    player.x = 562
-                    #vasak külg, ülemine
-                elif player.y > 235 and (player.x >= 310 and player.x <= 713):
-                    player.y = 235
-                    # alumine külg, parem
-                    """
                 if player.y < 1 and (player.x >= 562 and player.x<= 715):
                     player.y = 385
                     bg = magamistuba
@@ -222,7 +198,7 @@ def mäng():
                 elif player.y >= 490 and (player.x > 480 and player.x <= 520):
                     bg = elutuba
                     player.x = 420
-                    player.y = 150
+                    player.y = 153
                     uks.play()
                     #salaruum
                     
