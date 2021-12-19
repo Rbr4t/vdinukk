@@ -151,8 +151,6 @@ def mäng():
             if e.type == pygame.QUIT:
                 RUN = False
             if bg == koridor:
-                #koridori seinad, ei tööta korralikult
-                #ei tööta siis ei tööta, manuaalselt vist ei tohiks saadagi seda teha
                 if player.y < 1 and (player.x >= 562 and player.x<= 715):
                     player.y = 385
                     bg = magamistuba
