@@ -335,6 +335,7 @@ box5 = pygame.Rect((200,260),(330,35))
 box6 = pygame.Rect((710,0),(90,35))
 box7 = pygame.Rect((150,50),(500,200))
 box8 = pygame.Rect((270,268),(250,20))
+box9 = pygame.Rect((385, 370), (190, 80))
 #------------------#
 #----text-------#
 t_settings = pygame_gui.elements.UITextBox("Settings",box2, manager)
@@ -352,6 +353,10 @@ play = pygame_gui.elements.UIButton(box, "START", manager)
 play.show()
 credit = pygame_gui.elements.UIButton(box3, "CREDIT", manager)
 credit.show()
+guide = pygame_gui.elements.UIButton(box9,"GUIDE" ,manager)
+guide.show()
+väljundkast = pygame_gui.elements.UITextBox("Leia väljapääs<br>Kasuta nooleklahve et liikuda.", pygame.Rect((250, 300),(250, 100)), manager)
+väljundkast.hide()
 #-------------------#
 
 #-----settings------#
@@ -409,12 +414,22 @@ while RUN:
                     play.show()
                     credit.show()
                     settings.show()
-                    
+                    väljundkast.hide()
+                    guide.show()
                     t_volume.hide()
                     t_settings.hide()
                     liugur.hide()
                     credit_menu.hide()
                     exit.hide()
+            if e.user_type == pygame_gui.UI_BUTTON_PRESSED:
+                if e.ui_element == guide:
+                    exit.show()
+                    väljundkast.show()
+                    play.hide()
+                    credit.hide()
+                    settings.hide()
+                    guide.hide()
+                    
         manager.process_events(e)  # töötleb sündmusi
         
     aken.fill([255, 255, 255])
