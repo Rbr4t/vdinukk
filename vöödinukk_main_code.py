@@ -19,24 +19,36 @@ def mäng():
         pygame.display.flip()
 
 
-
-            
-
+    tegelane = "Poiss"
     #ANIMEERIMINE
 
-    #vajalikud pildid võetud kaustast
-    walkLeft = [pygame.image.load("characters/tüdruk_left/t_left1.png"),pygame.image.load("characters/tüdruk_left/t_left2.png"),
-                pygame.image.load("characters/tüdruk_left/t_left3.png"),pygame.image.load("characters/tüdruk_left/t_left4.png")]
-    walkRight = [pygame.image.load("characters/tüdruk_right/t_right1.png"), pygame.image.load("characters/tüdruk_right/t_right2.png"),
-                 pygame.image.load("characters/tüdruk_right/t_right3.png"), pygame.image.load("characters/tüdruk_right/t_right4.png")]
-    walkFront = [pygame.image.load("characters/tüdruk_front/t_front1.png"), pygame.image.load("characters/tüdruk_front/t_front2.png"),
-                 pygame.image.load("characters/tüdruk_front/t_front3.png"), pygame.image.load("characters/tüdruk_front/t_front4.png")]
-    walkBack = [pygame.image.load("characters/tüdruk_back/t_back1.png"), pygame.image.load("characters/tüdruk_back/t_back2.png"),
-                pygame.image.load("characters/tüdruk_back/t_back3.png"), pygame.image.load("characters/tüdruk_back/t_back4.png")]
-    playerpilt = "characters/tüdruk_front/t_front1.png"
-    playerpilt2 = playerpilt
-    char = pygame.image.load(playerpilt)
-    char2 = pygame.image.load(playerpilt2)
+#vajalikud pildid võetud kaustast
+    if tegelane == "Tüdruk":
+        walkLeft = [pygame.image.load("characters/tüdruk_left/t_left1.png"),pygame.image.load("characters/tüdruk_left/t_left2.png"),
+                        pygame.image.load("characters/tüdruk_left/t_left3.png"),pygame.image.load("characters/tüdruk_left/t_left4.png")]
+        walkRight = [pygame.image.load("characters/tüdruk_right/t_right1.png"), pygame.image.load("characters/tüdruk_right/t_right2.png"),
+                        pygame.image.load("characters/tüdruk_right/t_right3.png"), pygame.image.load("characters/tüdruk_right/t_right4.png")]
+        walkFront = [pygame.image.load("characters/tüdruk_front/t_front1.png"), pygame.image.load("characters/tüdruk_front/t_front2.png"),
+                        pygame.image.load("characters/tüdruk_front/t_front3.png"), pygame.image.load("characters/tüdruk_front/t_front4.png")]
+        walkBack = [pygame.image.load("characters/tüdruk_back/t_back1.png"), pygame.image.load("characters/tüdruk_back/t_back2.png"),
+                        pygame.image.load("characters/tüdruk_back/t_back3.png"), pygame.image.load("characters/tüdruk_back/t_back4.png")]
+        playerpilt = "characters/tüdruk_front/t_front1.png"
+        playerpilt2 = playerpilt
+        char = pygame.image.load(playerpilt)
+        char2 = pygame.image.load(playerpilt2)
+    elif tegelane == "Poiss":
+        walkLeft = [pygame.image.load("characters/poiss_left/p_left1.png"),pygame.image.load("characters/poiss_left/p_left2.png"),
+                        pygame.image.load("characters/poiss_left/p_left3.png"),pygame.image.load("characters/poiss_left/p_left4.png")]
+        walkRight = [pygame.image.load("characters/poiss_right/p_right1.png"), pygame.image.load("characters/poiss_right/p_right2.png"),
+                        pygame.image.load("characters/poiss_right/p_right3.png"), pygame.image.load("characters/poiss_right/p_right4.png")]
+        walkFront = [pygame.image.load("characters/poiss_front/p_front1.png"), pygame.image.load("characters/poiss_front/p_front2.png"),
+                        pygame.image.load("characters/poiss_front/p_front3.png"), pygame.image.load("characters/poiss_front/p_front4.png")]
+        walkBack = [pygame.image.load("characters/poiss_back/p_back1.png"), pygame.image.load("characters/poiss_back/p_back2.png"),
+                        pygame.image.load("characters/poiss_back/p_back3.png"), pygame.image.load("characters/poiss_back/p_back4.png")]
+        playerpilt = "characters/poiss_front/p_front1.png"
+        playerpilt2 = playerpilt
+        char = pygame.image.load(playerpilt)
+        char2 = pygame.image.load(playerpilt2)
 
     #TAUST
 
