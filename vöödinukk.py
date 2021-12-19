@@ -203,6 +203,7 @@ def mäng():
                         köök = köök2
                         võti1_leitud = True
                         print("Leidsid 1. võtme!")
+                    bg = köök
                     player.x = 510
                     player.y = 484
                     uks.play()
