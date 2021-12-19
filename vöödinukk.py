@@ -171,10 +171,12 @@ def mäng():
                     player.x = 725
                     uks.play()
                     player.y = 300
-                if võti1_leitud and võti2_leitud:
-                    if player.y > 460 and (player.x >= 130 and player.x<= 190):
+                if player.y > 460 and (player.x >= 130 and player.x<= 190):
+                    if võti1_leitud and võti2_leitud:   
                         print("Pääsesid majast välja, tubli töö!")
                         RUN = False
+                    else:
+                        print("Uks on lukus!")
             if bg == magamistuba:
                 if player.y <= 80 and (player.x >= 544 and player.x <= 707):
                     bg = sahver
