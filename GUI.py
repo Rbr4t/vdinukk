@@ -345,7 +345,7 @@ play.show()
 credit = pygame_gui.elements.UIButton(box3, "CREDIT", manager)
 credit.show()
 guide = pygame_gui.elements.UIButton(box9,"GUIDE" ,manager)
-väljundkast = pygame_gui.elements.UITextBox("Leia väljapääs<br>Kasuta nooleklahve et liikuda.", pygame.Rect((250, 300),(250, 100)), manager)
+väljundkast = pygame_gui.elements.UITextBox("Avasta ruume, sest väljapääsu pole<br>Kasuta nooleklahve et liikuda.", pygame.Rect((250, 300),(250, 100)), manager)
 väljundkast.hide()
 #-------------------#
 
