@@ -1,12 +1,26 @@
 import pygame
 
+#HELI
+pygame.mixer.init()
+kõndimine = pygame.mixer.Sound("footstep06.ogg")
+#kõndimine.play()
+kõndimine.set_volume(0.1)
+uks = pygame.mixer.Sound("doorOpen_1.ogg")
+uks.set_volume(0.1)
+musics = pygame.mixer.music.load("Twin Musicom - Stopping By the Inn.mp3")
+pygame.mixer.music.set_volume(0.05)
+pygame.mixer.music.play(-1)
 #FUNKTSIOONID
 
 def redrawWindow():
     screen.blit(bg, (0, 0))
     player.control(screen)
     pygame.display.flip()
-    
+
+
+
+        
+
 #ANIMEERIMINE
 
 #vajalikud pildid võetud kaustast
@@ -52,12 +66,11 @@ class Player:
         self.front1 = False
         self.back1 = True
         self.speed = 100
-        self.stayfront = False
-        self.stayback = False
+        
         self.walkCount = 0 
         
     def update(self, dt):
-    
+        
         if abs(self.vx) == abs(self.vy):
             
             pass          #Jätan nii et diagonaalselt ei saaks liikuda
@@ -65,6 +78,7 @@ class Player:
             
             self.x += self.vx * dt
             #print(self.vx)
+            
             self.y += self.vy * dt
             #print(self.vy)
         
@@ -113,10 +127,6 @@ screen = pygame.display.set_mode([800, 600])
 
 RUN = True
 
-
-listi = ["UP", "LEFT", "RIGHT", "DOWN"]
-buttonspressed = []
-
 player = Player()
 
 kell = pygame.time.Clock()
@@ -155,51 +165,65 @@ while RUN:
             if player.y < 1 and (player.x >= 562 and player.x<= 715):
                 player.y = 385
                 bg = magamistuba
+                uks.play()
             elif player.x < 5 and (player.y >= 320 and player.y <= 383):
                 bg = elutuba
                 player.x = 725
+                uks.play()
                 player.y = 300
         if bg == magamistuba:
             if player.y <= 80 and (player.x >= 544 and player.x <= 707):
                 bg = sahver
                 player.y = 433
+                uks.play()
             elif player.y > 385 and (player.x >= 544 and player.x<= 707):
                 bg = koridor
                 player.y = 2
+                uks.play()
         if bg == elutuba:
             if player.x > 730 and (player.y >= 274 and player.y <= 343):
                 bg = koridor
                 player.x =35
                 player.y = 360
+                uks.play()
             elif player.y <= 1 and (player.x >= 178 and player.x <= 230):
                 bg = köök
                 player.x = 254
                 player.y = 494
+                uks.play()
             elif player.y <= 150 and (player.x >= 410 and player.x <= 430):
                 bg = köök2
                 köök = köök2
                 player.x = 510
                 player.y = 484
+                uks.play()
         if bg == sahver:
             if player.x < 210 and (player.y > 216 and player.y < 260):
                 bg = sahver2
                 sahver = sahver2
+                uks.play()
             
             if player.y > 435 and (player.x >= 545 and player.x <= 710):
                 bg = magamistuba
                 player.x = 600
                 player.y = 90
+                uks.play()
         if bg == köök:
             if player.y >= 505 and (player.x > 213 and player.x <= 290):
                 bg = elutuba
                 player.x = 204
                 player.y = 7
+                uks.play()
                 #köök
             elif player.y >= 490 and (player.x > 480 and player.x <= 520):
                 bg = elutuba
                 player.x = 420
                 player.y = 150
+                uks.play()
                 #salaruum
+                
+        #KONTROLLID        
+        
         if e.type == pygame.KEYDOWN: #Kui vajutatakse alla nuppu
             if e.key == pygame.K_UP: # and player.x > speed
                 player.vy -= player.speed
@@ -207,28 +231,32 @@ while RUN:
                 player.right = False
                 player.up = True
                 player.down = False
-                buttonspressed.append("UP")
+                kõndimine.play(-1)
+                
             if e.key == pygame.K_DOWN:
                 player.vy += player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = True
-                buttonspressed.append("DOWN")
+                kõndimine.play(-1)
+                
             if e.key == pygame.K_LEFT:
                 player.vx -= player.speed
                 player.left = True
                 player.right = False
                 player.up = False
                 player.down = False
-                buttonspressed.append("LEFT")
+                kõndimine.play(-1)
+                
             if e.key == pygame.K_RIGHT:
                 player.vx += player.speed
                 player.left = False
                 player.right = True
                 player.up = False
                 player.down = False
-                buttonspressed.append("RIGHT")
+                kõndimine.play(-1)
+                
         if e.type == pygame.KEYUP: #kui enam ei vajutata seda
             if e.key == pygame.K_UP:
                 player.vy += player.speed
@@ -236,33 +264,37 @@ while RUN:
                 player.right = False
                 player.up = False
                 player.down = False
+                kõndimine.stop()
 #                 player.stayfront = False   
 #                 player.stayback = True
-                buttonspressed.remove("UP")
+               
             if e.key == pygame.K_DOWN:
                 player.vy -= player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = False
+                kõndimine.stop()
 #                 player.stayfront = True   
 #                 player.stayback = False
-                buttonspressed.remove("DOWN")
+                
             if e.key == pygame.K_LEFT:
                 player.vx += player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = False
-                buttonspressed.remove("LEFT")
+                kõndimine.stop()
+                
             if e.key == pygame.K_RIGHT:
                 player.vx -= player.speed
                 player.left = False
                 player.right = False
                 player.up = False
                 player.down = False
-                buttonspressed.remove("RIGHT")
-        
+                kõndimine.stop()
+#     color = bg.get_at((int(player.x), int(player.y)))
+#     print(color)
     #print(buttonspressed)
     print(int(player.x), int(player.y))
     #asukoha kontrollimiseks
