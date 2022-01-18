@@ -1,18 +1,17 @@
-from pygame import *
-import pygame_gui, pygame, random
-
+#from pygame import *
+import  pygame, pygame_gui, random
+#HELI
+pygame.mixer.init()
+kõndimine = pygame.mixer.Sound("music/footstep06.ogg")
+#kõndimine.play()
+kõndimine.set_volume(0.1)
+uks = pygame.mixer.Sound("music/doorOpen_1.ogg")
+uks.set_volume(0.1)
+musics = pygame.mixer.music.load("music/Twin Musicom - Stopping By the Inn.mp3")
+pygame.mixer.music.set_volume(0.05)
+    
 def mäng():
-    import pygame
-
-    #HELI
-    pygame.mixer.init()
-    kõndimine = pygame.mixer.Sound("footstep06.ogg")
-    #kõndimine.play()
-    kõndimine.set_volume(0.1)
-    uks = pygame.mixer.Sound("doorOpen_1.ogg")
-    uks.set_volume(0.1)
-    musics = pygame.mixer.music.load("Twin Musicom - Stopping By the Inn.mp3")
-    pygame.mixer.music.set_volume(0.05)
+    
     pygame.mixer.music.play(-1)
     #FUNKTSIOONID
 
@@ -314,7 +313,7 @@ def mäng():
         redrawWindow()
         screen.fill([255, 255, 255])
         
-    pygame.quit()
+    
 
 
 
@@ -323,8 +322,8 @@ pygame.display.set_caption("Vöödinukk")
 aken = pygame.display.set_mode([800, 600])
 manager = pygame_gui.UIManager([800, 600])  # loome UIManager objekti
 
-bglobby = pygame.image.load("Lobby.png")
-bg = pygame.image.load("background.png")
+bglobby = pygame.image.load("bg/Lobby.png")
+bg = pygame.image.load("bg/background.png")
 #---music-------#
 
 #---------------#
@@ -335,16 +334,21 @@ box2 = pygame.Rect((150,200),(500,200))
 box3 = pygame.Rect((385, 300), (190, 80))
 box4 = pygame.Rect((645, 200),(30, 30))
 box5 = pygame.Rect((200,260),(330,35))
+box5_1 = pygame.Rect((200,295),(330,35))
 box6 = pygame.Rect((710,0),(90,35))
 box7 = pygame.Rect((150,50),(500,200))
+
 box8 = pygame.Rect((270,268),(250,20))
+box8_1 = pygame.Rect((270,302),(250,20))
 box9 = pygame.Rect((385, 370), (190, 80))
 #------------------#
 #----text-------#
 t_settings = pygame_gui.elements.UITextBox("Settings",box2, manager)
 t_settings.hide()
-t_volume = pygame_gui.elements.UITextBox("Volume",box5, manager)
+t_volume = pygame_gui.elements.UITextBox("Muusika",box5, manager)
+t_volume2 = pygame_gui.elements.UITextBox("Liikumine",box5_1, manager)
 t_volume.hide()
+t_volume2.hide()
 #---------------#
 #-------exit-----#
 exit = pygame_gui.elements.UIButton(box4, "X", manager)
@@ -367,6 +371,8 @@ settings = pygame_gui.elements.UIButton(box6, "Settings", manager)
 settings.show()
 liugur = pygame_gui.elements.UIHorizontalSlider(box8,50,(0,100),manager)
 liugur.hide()
+liugur2 = pygame_gui.elements.UIHorizontalSlider(box8_1, 50, (0, 100), manager)
+liugur2.hide()
 #-------------------#
 #----credit-------#
 credit_menu = pygame_gui.elements.UITextBox("""Credit<br> <br>Tegid:<br> <br>Robert Koor<br>Lisandra Sokk<br>Merit Hass<br>Aleksandra Spitsõna""",box2, manager)
@@ -387,30 +393,40 @@ while RUN:
             if e.user_type == pygame_gui.UI_BUTTON_PRESSED:
                 if e.ui_element == play:
                     mäng()
+                    
+                    
             if e.user_type == pygame_gui.UI_BUTTON_PRESSED:
                 if e.ui_element == settings:
                     bgB = False
                     play.hide()
                     credit.hide()
                     settings.hide()
-                    
+                    liugur2.show()
                     t_settings.show()
                     t_volume.show()
                     liugur.show()
-                    
-                    if e.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
-                        if e.ui_element == liugur:
-                            print("Music")
+                    guide.hide()
                     exit.show()
+                    t_volume2.show()
+            if e.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+                if e.ui_element == liugur:
+                    print(e.value/100, end="\r")
+                    pygame.mixer.music.set_volume(e.value/100)
+            if e.user_type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+                if e.ui_element == liugur2:
+                    print(e.value/100)
+                    uks.set_volume(e.value/100)
+                    kõndimine.set_volume(e.value/100)
             if e.user_type == pygame_gui.UI_BUTTON_PRESSED:
                 if e.ui_element == credit:
                     bgB = True
                     play.hide()
                     credit.hide()
                     settings.hide()
-                    
+                    liugur2.hide()
                     exit.show()
                     credit_menu.show()
+                    t_volume2.hide()
             if e.user_type == pygame_gui.UI_BUTTON_PRESSED:
                 if e.ui_element == exit:
                     bgB = False
@@ -424,6 +440,8 @@ while RUN:
                     liugur.hide()
                     credit_menu.hide()
                     exit.hide()
+                    liugur2.hide()
+                    t_volume2.hide()
             if e.user_type == pygame_gui.UI_BUTTON_PRESSED:
                 if e.ui_element == guide:
                     exit.show()
@@ -432,7 +450,8 @@ while RUN:
                     credit.hide()
                     settings.hide()
                     guide.hide()
-                    
+                    liugur2.hide()
+                    t_volume2.hide()
         manager.process_events(e)  # töötleb sündmusi
         
     aken.fill([255, 255, 255])
